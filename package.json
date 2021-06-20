@@ -1,0 +1,33 @@
+{
+  "name": "firebase-auth-nodejs-express-csurf",
+  "version": "1.0.0",
+  "description": "Ejemplo de autenticación mediante Firebase Auth con verficación de sessionCookie desde el servidor. Protección CSRF implementando middleware con la librería CSURF.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aa-avila/firebase-auth-nodejs-express-csurf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aa-avila/firebase-auth-nodejs-express-csurf/issues"
+  },
+  "homepage": "https://github.com/aa-avila/firebase-auth-nodejs-express-csurf#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "express-unless": "^0.5.0",
+    "firebase-admin": "^9.9.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

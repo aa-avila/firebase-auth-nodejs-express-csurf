@@ -1,24 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const MainCtrl = require('../controllers/mainController');
-const fbAuth = require('../firebaseConnect');
-
-// isAuth
-const isAuth = async (req, res, next) => {
-    try {
-        const sessionCookie = req.cookies.session || "";
-
-        await fbAuth
-            .verifySessionCookie(sessionCookie, true /** checkRevoked */);
-
-        console.log('Estas logueado');
-        next();
-
-    } catch (error) {
-        console.log('Error en isAuth:', error);
-        res.redirect('/login');
-    }
-}
+const isAuth = require('../checkAuth');
 
 
 router.get('/', MainCtrl.index_page);

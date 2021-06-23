@@ -29,7 +29,6 @@ module.exports = class MainCtrl {
     static async sessionLogin(req, res) {
         try {
             const idToken = req.body.idToken.toString();
-
             //const expiresIn = 60 * 60 * 24 * 5 * 1000; //5 days
             //const expiresIn = 60 * 60 * 1 * 1000; //1 hour
             const expiresIn = 60 * 5 * 1000; //5 min
@@ -43,7 +42,7 @@ module.exports = class MainCtrl {
                         res.end(JSON.stringify({ status: "success" }));
                     },
                     (error) => {
-                        res.status(401).send("UNAUTHORIZED REQUEST!");
+                        res.status(401).send("UNAUTHORIZED REQUEST!", error.message);
                     }
                 );
 
@@ -68,8 +67,18 @@ module.exports = class MainCtrl {
     //
     static async profile_page(req, res) {
         try {
-            // const data = await TasksService.tasksAll();
-            res.render('profile', { title: 'FB Auth + ExpressJS', script: 'profile.js' });
+            const sessionCookie = req.cookies.session;
+
+            const sessionData = await fbAuth
+                .verifySessionCookie(sessionCookie);
+
+            console.log("[profile] userId:", sessionData.uid);
+            console.log("[profile] userEmail:", sessionData.email);
+
+            const userId = sessionData.uid;
+            const userEmail = sessionData.email;
+
+            res.render('profile', { title: 'FB Auth + ExpressJS', script: 'profile.js', user_id: userId, user_email: userEmail });
 
         } catch (e) {
             console.log(e.message);

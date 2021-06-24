@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
     document
-      .getElementById("login")
+      .getElementById("loginForm")
       .addEventListener("submit", (event) => {
         event.preventDefault();
         const login = event.target.login.value;

@@ -1,11 +1,9 @@
-// const TasksService = require('../services/tasksService');
 const fbAuth = require('../firebaseConnect');
 
 module.exports = class MainCtrl {
     //
     static async index_page(req, res) {
         try {
-            // const data = await TasksService.tasksAll();
             res.render('home', { title: 'FB Auth + ExpressJS', script: 'home.js' });
         } catch (e) {
             console.log(e.message);
@@ -16,9 +14,7 @@ module.exports = class MainCtrl {
     //
     static async login_page(req, res) {
         try {
-            // const data = await TasksService.tasksAll();
             res.render('login', { layout: 'loginLayout', title: 'FB Auth + ExpressJS', script: 'login.js' });
-
         } catch (e) {
             console.log(e.message);
             res.status(413).send(e.message);
@@ -72,14 +68,13 @@ module.exports = class MainCtrl {
             const sessionData = await fbAuth
                 .verifySessionCookie(sessionCookie);
 
-            console.log("[profile] userId:", sessionData.uid);
-            console.log("[profile] userEmail:", sessionData.email);
+            //console.log("[profile] userId:", sessionData.uid);
+            //console.log("[profile] userEmail:", sessionData.email);
 
             const userId = sessionData.uid;
             const userEmail = sessionData.email;
 
             res.render('profile', { title: 'FB Auth + ExpressJS', script: 'profile.js', user_id: userId, user_email: userEmail });
-
         } catch (e) {
             console.log(e.message);
             res.status(413).send(e.message);

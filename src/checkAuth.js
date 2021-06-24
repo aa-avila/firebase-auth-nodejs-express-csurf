@@ -10,14 +10,12 @@ const isAuth = async (req, res, next) => {
 
         console.log('Estas logueado');
         //console.log(data);
-        console.log("[isAuth] userId:", sessionData.uid);
-        console.log("[isAuth] userEmail:", sessionData.email);
+        //console.log("[isAuth] userId:", sessionData.uid);
+        //console.log("[isAuth] userEmail:", sessionData.email);
 
-        
         next();
-
-    } catch (error) {
-        console.log('Error en isAuth:', error);
+    } catch (e) {
+        console.log('Error en isAuth:', e.message);
         res.redirect('/login');
     }
 }

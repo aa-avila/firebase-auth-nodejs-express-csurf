@@ -17,7 +17,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Firebase Auth + ExpressJS</a>
+            <a class="navbar-brand" href="/">Firebase Auth + ExpressJS</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Registrarse</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="logout">Salir</a>
+                        <a class="nav-link" href="/sessionLogout" id="logout">Salir</a>
                     </li>
                 </ul>
             </div>
@@ -121,6 +121,9 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"
         defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js" defer></script>
     <script src="{{script}}"></script>
 </body>
 

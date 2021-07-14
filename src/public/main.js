@@ -58,9 +58,9 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // LOGIN -> GOOGLE SIGNIN
-  const googleBtn = document.querySelector("#googleLogin");
-  
-  googleBtn.addEventListener("click", () => {
+  const googleBtn_signin = document.querySelector("#googleLogin");
+
+  googleBtn_signin.addEventListener("click", () => {
     console.log("google click");
 
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -95,9 +95,126 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // LOGIN -> FACEBOOK SIGNIN
-  const facebookBtn = document.querySelector("#facebookLogin");
+  const facebookBtn_signin = document.querySelector("#facebookLogin");
 
-  facebookBtn.addEventListener("click", () => {
+  facebookBtn_signin.addEventListener("click", () => {
+    console.log("facebook click");
+
+    const provider = new firebase.auth.FacebookAuthProvider();
+
+    fbAuth
+      .signInWithPopup(provider)
+      .then(({ user }) => {
+        console.log(user.uid);
+        return user.getIdToken().then((idToken) => {
+          return fetch("/sessionLogin", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+            },
+            body: JSON.stringify({
+              idToken,
+            }),
+          });
+        });
+      })
+      .then(() => {
+        return fbAuth.signOut();
+      })
+      .then(() => {
+        window.location.assign("/profile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  // SIGNUP -> EMAIL
+  const signupForm = document.querySelector("#signup-form");
+
+  signupForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector("#signup-email").value;
+    const password = document.querySelector("#signup-password").value;
+
+    fbAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        console.log(user.uid);
+        return user.getIdToken().then((idToken) => {
+          return fetch("/sessionLogin", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+            },
+            body: JSON.stringify({
+              idToken,
+            }),
+          });
+        });
+      })
+      .then(() => {
+        return fbAuth.signOut();
+      })
+      .then(() => {
+        window.location.assign("/profile");
+      })
+      .catch((error) => {
+        console.log("Error en signup:", error);
+        /*
+            const loginMsg = document.getElementById('loginMsg');
+            loginMsg.innerHTML = 'Usuario y/o contraseña inválidos';
+            */
+      });
+    return false;
+  });
+
+  // SIGNUP -> GOOGLE
+  const googleBtn_signup = document.querySelector("#googleSignup");
+
+  googleBtn_signup.addEventListener("click", () => {
+    console.log("google click");
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    fbAuth
+      .signInWithPopup(provider)
+      .then(({ user }) => {
+        console.log(user.uid);
+        return user.getIdToken().then((idToken) => {
+          return fetch("/sessionLogin", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+            },
+            body: JSON.stringify({
+              idToken,
+            }),
+          });
+        });
+      })
+      .then(() => {
+        return fbAuth.signOut();
+      })
+      .then(() => {
+        window.location.assign("/profile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  // SIGNUP -> FACEBOOK
+  const facebookBtn_signup = document.querySelector("#facebookSignup");
+
+  facebookBtn_signup.addEventListener("click", () => {
     console.log("facebook click");
 
     const provider = new firebase.auth.FacebookAuthProvider();

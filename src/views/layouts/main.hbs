@@ -1,21 +1,20 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css"
-        integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous" defer>
-    <link rel="stylesheet" href="main.css">
-    {{!--
-    <script src="https://kit.fontawesome.com/cee8507c40.js" crossorigin="anonymous"></script> --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css"
+        integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css" />
+    {{!
+    <script src="https://kit.fontawesome.com/cee8507c40.js" crossorigin="anonymous"></script> }}
 </head>
 
 <body>
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="/">Firebase Auth + ExpressJS</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -59,23 +58,25 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <button type="button" class="btn btn-success btn-block" id="googleLogin">
+                        Continuar con Google
+                    </button>
+                    <button type="button" class="btn btn-primary btn-block" id="facebookLogin">
+                        Continuar con Facebook
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Email:</p>
                     <form action="" id="login-form">
                         <div class="form-group">
-                            <input type="text" id="login-email" class="form-control" 
-                            placeholder="Usuari@" required>
+                            <input type="text" id="login-email" class="form-control" placeholder="Usuari@" required />
                         </div>
                         <div class="form-group">
-                            <input type="password" id="login-password" class="form-control" 
-                            placeholder="Clave" required>
+                            <input type="password" id="login-password" class="form-control" placeholder="Clave"
+                                required />
                         </div>
                         <button type="submit" class="btn btn-secondary btn-block">
-                            Ingresar con Email
-                        </button>
-                        <button type="button" class="btn btn-success btn-block" id="googleLogin">
-                            Ingresar con Google
-                        </button>
-                        <button type="button" class="btn btn-primary btn-block" id="facebookLogin">
-                            Ingresar con Facebook
+                            Continuar con email
                         </button>
                     </form>
                 </div>
@@ -89,20 +90,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="signupModalLabel">Registrar nuev@ usuari@</h5>
+                    <h5 class="modal-title" id="signupModalLabel">Registrarse</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <button type="button" class="btn btn-success btn-block" id="googleSignup">
+                        Continuar con Google
+                    </button>
+                    <button type="button" class="btn btn-primary btn-block" id="facebookSignup">
+                        Continuar con Facebook
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Email:</p>
                     <form action="" id="signup-form">
                         <div class="form-group">
-                            <input type="text" id="signup-email" class="form-control" 
-                            placeholder="Usuari@" required>
+                            <input type="text" id="signup-email" class="form-control" placeholder="Usuari@" required />
                         </div>
                         <div class="form-group">
-                            <input type="password" id="signup-password" class="form-control" 
-                            placeholder="Clave" required>
+                            <input type="password" id="signup-password" class="form-control" placeholder="Clave"
+                                required />
                         </div>
                         <button type="submit" class="btn btn-primary">Registrar!</button>
                     </form>
@@ -110,9 +119,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"

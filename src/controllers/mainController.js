@@ -12,16 +12,6 @@ module.exports = class MainCtrl {
     }
 
     //
-    static async login_page(req, res) {
-        try {
-            res.render('login', { layout: 'loginLayout', title: 'FB Auth + ExpressJS', script: 'login.js' });
-        } catch (e) {
-            console.log(e.message);
-            res.status(413).send(e.message);
-        }
-    }
-
-    //
     static async sessionLogin(req, res) {
         try {
             const idToken = req.body.idToken.toString();
@@ -52,7 +42,7 @@ module.exports = class MainCtrl {
     static async sessionLogout(req, res) {
         try {
             res.clearCookie("session");
-            res.redirect("/login");
+            res.redirect("/");
 
         } catch (e) {
             console.log(e.message);

@@ -58,7 +58,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <button type="button" class="btn btn-success btn-block" id="googleLogin">
+                    <button type="button" class="btn btn-danger btn-block" id="googleLogin">
                         Continuar con Google
                     </button>
                     <button type="button" class="btn btn-primary btn-block" id="facebookLogin">
@@ -66,16 +66,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Email:</p>
                     <form action="" id="login-form">
                         <div class="form-group">
-                            <input type="text" id="login-email" class="form-control" placeholder="Usuari@" required />
+                            <label for="login-email">Email</label>
+                            <input type="text" id="login-email" class="form-control" placeholder="nombre@host.com" required />
                         </div>
                         <div class="form-group">
+                            <label for="login-password">Clave</label>
                             <input type="password" id="login-password" class="form-control" placeholder="Clave"
                                 required />
                         </div>
-                        <button type="submit" class="btn btn-secondary btn-block">
+                        <button type="submit" class="btn btn-success btn-block">
                             Continuar con email
                         </button>
                     </form>
@@ -96,7 +97,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <button type="button" class="btn btn-success btn-block" id="googleSignup">
+                    <button type="button" class="btn btn-danger btn-block" id="googleSignup">
                         Continuar con Google
                     </button>
                     <button type="button" class="btn btn-primary btn-block" id="facebookSignup">
@@ -104,16 +105,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Email:</p>
                     <form action="" id="signup-form">
                         <div class="form-group">
-                            <input type="text" id="signup-email" class="form-control" placeholder="Usuari@" required />
+                            <label for="signup-email">Email</label>
+                            <input type="text" id="signup-email" class="form-control" placeholder="nombre@host.com" required />
                         </div>
                         <div class="form-group">
+                            <label for="signup-password">Clave</label>
                             <input type="password" id="signup-password" class="form-control" placeholder="Clave"
                                 required />
                         </div>
-                        <button type="submit" class="btn btn-primary">Registrar!</button>
+                        <button type="submit" class="btn btn-success btn-block">Registrar!</button>
                     </form>
                 </div>
             </div>

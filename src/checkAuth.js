@@ -16,7 +16,7 @@ const isAuth = async (req, res, next) => {
         next();
     } catch (e) {
         console.log('Error en isAuth:', e.message);
-        res.redirect('/login');
+        res.redirect('/');
     }
 }
 

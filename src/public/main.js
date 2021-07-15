@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
+  // FIREBASE
   const firebaseConfig = {
     apiKey: "AIzaSyALrC_0YGPOfQnVb_TN0QIt-CqFQUC1KhI",
     authDomain: "fir-auth-nodejs-express.firebaseapp.com",
@@ -10,36 +11,37 @@ window.addEventListener("DOMContentLoaded", () => {
 
   firebase.initializeApp(firebaseConfig);
 
+  // Instancia firebase auth
   const fbAuth = firebase.auth();
 
   fbAuth.setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-  // LOGIN -> Email and Password
-  const loginForm = document.querySelector("#login-form");
+  //*********************************************************/
+  // Funcion sessionLogin
+  const sessionLogin = (user) => {
+    console.log(user.uid);
+    return user.getIdToken().then((idToken) => {
+      return fetch("/sessionLogin", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+        },
+        body: JSON.stringify({
+          idToken,
+        }),
+      });
+    });
+  };
 
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const email = document.querySelector("#login-email").value;
-    const password = document.querySelector("#login-password").value;
-
+  //*********************************************************/
+  // Funcion SignIn with Email
+  const fbAuth_signInWithEmail = (email, password) => {
     fbAuth
       .signInWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        console.log(user.uid);
-        return user.getIdToken().then((idToken) => {
-          return fetch("/sessionLogin", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-            },
-            body: JSON.stringify({
-              idToken,
-            }),
-          });
-        });
+      .then(async ({ user }) => {
+        await sessionLogin(user);
       })
       .then(() => {
         return fbAuth.signOut();
@@ -54,6 +56,39 @@ window.addEventListener("DOMContentLoaded", () => {
             loginMsg.innerHTML = 'Usuario y/o contraseña inválidos';
             */
       });
+  };
+
+  //*********************************************************/
+  // Funcion SignIn with Provider
+  const fbAuth_signInWithProvider = (provider) => {
+    fbAuth
+      .signInWithPopup(provider)
+      .then(async ({ user }) => {
+        await sessionLogin(user);
+      })
+      .then(() => {
+        return fbAuth.signOut();
+      })
+      .then(() => {
+        window.location.assign("/profile");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //*********************************************************/
+  // LOGIN -> Email and Password
+  const loginForm = document.querySelector("#login-form");
+
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector("#login-email").value;
+    const password = document.querySelector("#login-password").value;
+
+    fbAuth_signInWithEmail(email, password);
+
     return false;
   });
 
@@ -63,35 +98,9 @@ window.addEventListener("DOMContentLoaded", () => {
   googleBtn_signin.addEventListener("click", () => {
     console.log("google click");
 
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-    fbAuth
-      .signInWithPopup(provider)
-      .then(({ user }) => {
-        console.log(user.uid);
-        return user.getIdToken().then((idToken) => {
-          return fetch("/sessionLogin", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-            },
-            body: JSON.stringify({
-              idToken,
-            }),
-          });
-        });
-      })
-      .then(() => {
-        return fbAuth.signOut();
-      })
-      .then(() => {
-        window.location.assign("/profile");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fbAuth_signInWithProvider(googleProvider);
   });
 
   // LOGIN -> FACEBOOK SIGNIN
@@ -100,37 +109,12 @@ window.addEventListener("DOMContentLoaded", () => {
   facebookBtn_signin.addEventListener("click", () => {
     console.log("facebook click");
 
-    const provider = new firebase.auth.FacebookAuthProvider();
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-    fbAuth
-      .signInWithPopup(provider)
-      .then(({ user }) => {
-        console.log(user.uid);
-        return user.getIdToken().then((idToken) => {
-          return fetch("/sessionLogin", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-            },
-            body: JSON.stringify({
-              idToken,
-            }),
-          });
-        });
-      })
-      .then(() => {
-        return fbAuth.signOut();
-      })
-      .then(() => {
-        window.location.assign("/profile");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fbAuth_signInWithProvider(facebookProvider);
   });
 
+  //*********************************************************/
   // SIGNUP -> EMAIL
   const signupForm = document.querySelector("#signup-form");
 
@@ -142,21 +126,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     fbAuth
       .createUserWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        console.log(user.uid);
-        return user.getIdToken().then((idToken) => {
-          return fetch("/sessionLogin", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-            },
-            body: JSON.stringify({
-              idToken,
-            }),
-          });
-        });
+      .then(async ({ user }) => {
+        await sessionLogin(user);
       })
       .then(() => {
         return fbAuth.signOut();
@@ -180,35 +151,9 @@ window.addEventListener("DOMContentLoaded", () => {
   googleBtn_signup.addEventListener("click", () => {
     console.log("google click");
 
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-    fbAuth
-      .signInWithPopup(provider)
-      .then(({ user }) => {
-        console.log(user.uid);
-        return user.getIdToken().then((idToken) => {
-          return fetch("/sessionLogin", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-            },
-            body: JSON.stringify({
-              idToken,
-            }),
-          });
-        });
-      })
-      .then(() => {
-        return fbAuth.signOut();
-      })
-      .then(() => {
-        window.location.assign("/profile");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fbAuth_signInWithProvider(googleProvider);
   });
 
   // SIGNUP -> FACEBOOK
@@ -217,34 +162,8 @@ window.addEventListener("DOMContentLoaded", () => {
   facebookBtn_signup.addEventListener("click", () => {
     console.log("facebook click");
 
-    const provider = new firebase.auth.FacebookAuthProvider();
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-    fbAuth
-      .signInWithPopup(provider)
-      .then(({ user }) => {
-        console.log(user.uid);
-        return user.getIdToken().then((idToken) => {
-          return fetch("/sessionLogin", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-            },
-            body: JSON.stringify({
-              idToken,
-            }),
-          });
-        });
-      })
-      .then(() => {
-        return fbAuth.signOut();
-      })
-      .then(() => {
-        window.location.assign("/profile");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fbAuth_signInWithProvider(facebookProvider);
   });
 });

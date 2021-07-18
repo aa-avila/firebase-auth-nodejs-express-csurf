@@ -1,6 +1,11 @@
-
-    <h1>Home page</h1>
-    <p>This page is public</p>
-    <a href="/profile">Profile</a>
-    <br>
-    <a href="/private-content-2">Other private content</a>
+<h1>Home</h1>
+<h5>Esta página es pública</h5>
+{{#if logged}}
+    <p>Estás logueado/a</p>
+{{/if}}
+{{#unless logged}}
+    <p>No estás logueado/a. Ingresa o registrate para acceder a tu contenido privado.</p>
+{{/unless}}
+<a href="/profile">Perfil</a>
+<br>
+<a href="/private-content-2">Otro contenido privado</a>

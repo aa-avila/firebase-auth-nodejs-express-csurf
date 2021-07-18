@@ -4,7 +4,7 @@ module.exports = class MainCtrl {
     //
     static async index_page(req, res) {
         try {
-            res.render('home', { title: 'FB Auth + ExpressJS', script: 'home.js' });
+            res.render('home', { title: 'Home', script: 'home.js', logged: req.logged });
         } catch (e) {
             console.log(e.message);
             res.status(413).send(e.message);
@@ -53,18 +53,10 @@ module.exports = class MainCtrl {
     //
     static async profile_page(req, res) {
         try {
-            const sessionCookie = req.cookies.session;
+            const userId = req.userId;
+            const userEmail = req.userEmail;
 
-            const sessionData = await fbAuth
-                .verifySessionCookie(sessionCookie);
-
-            //console.log("[profile] userId:", sessionData.uid);
-            //console.log("[profile] userEmail:", sessionData.email);
-
-            const userId = sessionData.uid;
-            const userEmail = sessionData.email;
-
-            res.render('profile', { title: 'FB Auth + ExpressJS', script: 'profile.js', user_id: userId, user_email: userEmail });
+            res.render('profile', { title: 'Perfil', script: 'profile.js', logged: req.logged, user_id: userId, user_email: userEmail});
         } catch (e) {
             console.log(e.message);
             res.status(413).send(e.message);

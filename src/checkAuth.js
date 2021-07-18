@@ -9,9 +9,10 @@ const isAuth = async (req, res, next) => {
             .verifySessionCookie(sessionCookie, true /** checkRevoked */);
 
         console.log('Estas logueado');
-        //console.log(data);
-        //console.log("[isAuth] userId:", sessionData.uid);
-        //console.log("[isAuth] userEmail:", sessionData.email);
+
+        req.logged = true;
+        req.userId = sessionData.uid;
+        req.userEmail = sessionData.email;
 
         next();
     } catch (e) {

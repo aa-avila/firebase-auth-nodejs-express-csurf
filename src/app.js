@@ -43,9 +43,25 @@ app.all('*', (req, res, next) => {
 // ROUTES
 app.use(routes);
 
+
 /*********************/
 // STATIC FILES
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+/*********************/
+// ERROR HANDLING
+// Error 404
+app.use((req, res, next) => {
+    const error = new Error("La página solicitada no existe.");
+    error.status = 404;
+    next(error);
+  });
+  
+  // Error handler
+  app.use((error, req, res, next) => {
+      res.status(error.status || 500).render('error', {layout: 'errorLayout', title: 'Error ' + error.status, errorStatus: error.status, errorMsg: error.message || 'Internal Server Error'});
+    });
 
 
 /*********************/

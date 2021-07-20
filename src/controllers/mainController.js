@@ -1,7 +1,14 @@
 const fbAuth = require('../firebaseConnect');
 
 module.exports = class MainCtrl {
-    //
+    // generador de error
+    static async error_gen(req, res) {
+        const error = new Error('Algo salio mal! (error generado intencionalmente)');
+        error.status = 413;
+        res.status(error.status).render('error', {layout: 'errorLayout', title: 'Error ' + error.status, errorStatus: error.status, errorMsg: error.message});
+    }
+
+    // HOME page
     static async index_page(req, res) {
         try {
             res.render('home', { title: 'Home', script: 'home.js', logged: req.logged });
@@ -11,7 +18,20 @@ module.exports = class MainCtrl {
         }
     }
 
-    //
+    // Profile Page
+    static async profile_page(req, res) {
+        try {
+            const userId = req.userId;
+            const userEmail = req.userEmail;
+
+            res.render('profile', { title: 'Perfil', script: 'profile.js', logged: req.logged, user_id: userId, user_email: userEmail});
+        } catch (e) {
+            console.log(e.message);
+            res.status(413).send(e.message);
+        }
+    }
+
+    // Session Login
     static async sessionLogin(req, res) {
         try {
             const idToken = req.body.idToken.toString();
@@ -38,25 +58,12 @@ module.exports = class MainCtrl {
         }
     }
 
-    //
+    // Session Logout
     static async sessionLogout(req, res) {
         try {
             res.clearCookie("session");
             res.redirect("/");
 
-        } catch (e) {
-            console.log(e.message);
-            res.status(413).send(e.message);
-        }
-    }
-
-    //
-    static async profile_page(req, res) {
-        try {
-            const userId = req.userId;
-            const userEmail = req.userEmail;
-
-            res.render('profile', { title: 'Perfil', script: 'profile.js', logged: req.logged, user_id: userId, user_email: userEmail});
         } catch (e) {
             console.log(e.message);
             res.status(413).send(e.message);

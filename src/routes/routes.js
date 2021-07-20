@@ -9,10 +9,8 @@ router.get('/', isAuthPublic, MainCtrl.index_page);
 router.post('/sessionLogin', MainCtrl.sessionLogin);
 router.get('/sessionLogout', MainCtrl.sessionLogout);
 router.get('/profile', isAuth, MainCtrl.profile_page);
+router.get('/error', MainCtrl.error_gen);
 
-// router.get("/signup", function (req, res) {
-//     res.render("signup.html");
-// });
 
 
 module.exports = router;

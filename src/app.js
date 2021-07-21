@@ -60,7 +60,11 @@ app.use((req, res, next) => {
   
   // Error handler
   app.use((error, req, res, next) => {
-      res.status(error.status || 500).render('error', {layout: 'errorLayout', title: 'Error ' + error.status, errorStatus: error.status, errorMsg: error.message || 'Internal Server Error'});
+      if (error.status) {
+      res.status(error.status).render('error', {layout: 'errorLayout', title: 'Error ' + error.status, errorStatus: error.status, errorMsg: error.message});
+      } else {
+      res.status(500).render('error', {layout: 'errorLayout', title: 'Error 500', errorStatus: 500, errorMsg: 'Internal Server Error.'});
+      }
     });
 
 

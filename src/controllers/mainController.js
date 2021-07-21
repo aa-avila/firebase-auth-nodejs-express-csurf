@@ -1,20 +1,27 @@
 const fbAuth = require('../firebaseConnect');
 
 module.exports = class MainCtrl {
-    // generador de error
-    static async error_gen(req, res) {
-        const error = new Error('Algo salio mal! (error generado intencionalmente)');
-        error.status = 413;
-        res.status(error.status).render('error', {layout: 'errorLayout', title: 'Error ' + error.status, errorStatus: error.status, errorMsg: error.message});
+    // modelo generador de error
+    static async error_gen(req, res, next) {
+        try {
+            throw new Error('Algo salio mal! (error generado intencionalmente)');
+        } catch (e) {
+            console.log('Error: ' + e.message);
+            const error = new Error(e.message);
+            error.status = 413;
+            next(error);
+        }
     }
 
     // HOME page
-    static async index_page(req, res) {
+    static async index_page(req, res, next) {
         try {
             res.render('home', { title: 'Home', script: 'home.js', logged: req.logged });
         } catch (e) {
-            console.log(e.message);
-            res.status(413).send(e.message);
+            console.log('Error: ' + e.message);
+            const error = new Error(e.message);
+            error.status = 413;
+            next(error);
         }
     }
 

@@ -53,7 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ERROR HANDLING
 // Error 404
 app.use((req, res, next) => {
-    const error = new Error("La página solicitada no existe.");
+    const error = new Error("El recurso solicitado no existe.");
     error.status = 404;
     next(error);
   });

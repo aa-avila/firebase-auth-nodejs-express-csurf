@@ -1,11 +1,16 @@
 <h1>Home</h1>
 <h5>Esta página es pública</h5>
-{{#if logged}}
-    <p>Estás logueado/a</p>
-{{/if}}
-{{#unless logged}}
-    <p>No estás logueado/a. Ingresa o registrate para acceder a tu contenido privado.</p>
-{{/unless}}
 <a href="/profile">Perfil</a>
 <br>
-<a href="/private-content-2">Otro contenido privado</a>
+<a href="/aasdjhg">Recurso inexistente</a>
+<br>
+<a href="/error">Error generado en el servidor</a>
+<br>
+<br>
+<br>
+{{#if logged}}
+    <div class="alert alert-success" role="alert">Estás logueado/a</div>
+{{/if}}
+{{#unless logged}}
+    <div class="alert alert-danger" role="alert">No estás logueado/a. Ingresa o registrate para acceder a tu contenido privado.</div>
+{{/unless}}

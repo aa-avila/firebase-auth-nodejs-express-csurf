@@ -8,7 +8,7 @@ const isAuthPublic = async (req, res, next) => {
         const sessionData = await fbAuth
             .verifySessionCookie(sessionCookie, true /** checkRevoked */);
 
-        console.log('Estas logueado');
+        console.log('isAuthPublic: Estas logueado');
 
         req.logged = true;
         req.userId = sessionData.uid;
@@ -16,7 +16,7 @@ const isAuthPublic = async (req, res, next) => {
 
         next();
     } catch (e) {
-        console.log('Error en isAuth:', e.message);
+        console.log('Error en isAuthPublic:', e.message);
         req.logged = false;
         next();
     }

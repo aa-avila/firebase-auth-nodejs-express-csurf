@@ -24,17 +24,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     {{#unless logged}}
-                        <li class="nav-item" id="login">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Ingresar</a>
-                        </li>
-                        <li class="nav-item" id="signup">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Registrarse</a>
-                        </li>
+                    <li class="nav-item" id="login">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Ingresar</a>
+                    </li>
+                    <li class="nav-item" id="signup">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Registrarse</a>
+                    </li>
                     {{/unless}}
                     {{#if logged}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/sessionLogout" id="logout">Salir</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sessionLogout" id="logout">Salir</a>
+                    </li>
                     {{/if}}
                 </ul>
             </div>
@@ -80,7 +80,7 @@
                                 required />
                         </div>
                         <div class="form-group">
-                            <label for="login-password">Clave</label>
+                            <label for="login-password">Contraseña</label>
                             <input type="password" id="login-password" class="form-control" placeholder="Clave"
                                 required />
                         </div>
@@ -88,6 +88,9 @@
                             Continuar con email
                         </button>
                     </form>
+                    <div class="d-flex justify-content-center p-1">
+                        <span id="loginMsg"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,12 +126,15 @@
                                 required />
                         </div>
                         <div class="form-group">
-                            <label for="signup-password">Clave</label>
+                            <label for="signup-password">Contraseña</label>
                             <input type="password" id="signup-password" class="form-control" placeholder="Clave"
                                 required />
                         </div>
                         <button type="submit" class="btn btn-info btn-block">Registrar!</button>
                     </form>
+                    <div class="d-flex justify-content-center p-1">
+                        <span id="signupMsg"></span>
+                    </div>
                 </div>
             </div>
         </div>

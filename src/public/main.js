@@ -51,10 +51,9 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .catch((error) => {
         console.log("Error en login:", error);
-        /*
-            const loginMsg = document.getElementById('loginMsg');
-            loginMsg.innerHTML = 'Usuario y/o contraseña inválidos';
-            */
+
+        const loginMsg = document.getElementById('loginMsg');
+        loginMsg.innerHTML = 'Email y/o contraseña inválidos';
       });
   };
 
@@ -137,10 +136,9 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .catch((error) => {
         console.log("Error en signup:", error);
-        /*
-            const loginMsg = document.getElementById('loginMsg');
-            loginMsg.innerHTML = 'Usuario y/o contraseña inválidos';
-            */
+        
+        const signupMsg = document.getElementById('signupMsg');
+        signupMsg.innerHTML = 'Email y/o contraseña inválidos';
       });
     return false;
   });

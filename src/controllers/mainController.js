@@ -1,4 +1,6 @@
-const fbAuth = require('../firebaseConnect');
+const fbModule = require('../firebaseConnect');
+const fbAuth = fbModule.fbAuth;
+const PersonalDataService = require('../services/personalDataService');
 
 module.exports = class MainCtrl {
     // modelo generador de error
@@ -16,25 +18,51 @@ module.exports = class MainCtrl {
     // HOME page
     static async index_page(req, res, next) {
         try {
-            res.render('home', { title: 'Home', script: 'home.js', logged: req.logged });
+            const logged = req.logged;
+
+            res.render('home', { title: 'Home', script: 'home.js', logged });
         } catch (e) {
             console.log('Error: ' + e.message);
             const error = new Error(e.message);
-            error.status = 413;
+            error.status = 500;
             next(error);
         }
     }
 
     // Profile Page
-    static async profile_page(req, res) {
+    static async profile_page(req, res, next) {
         try {
+            // Auth state & current user id & email
+            const logged = req.logged;
             const userId = req.userId;
             const userEmail = req.userEmail;
 
-            res.render('profile', { title: 'Perfil', script: 'profile.js', logged: req.logged, user_id: userId, user_email: userEmail});
+            // Get personal data
+            let personalData = await PersonalDataService.getPersonalData(userId);
+
+            // Si no existe, crearla (por ej en caso de que el usuario sea nuevo y no exista aun en la BD)
+            if (personalData === undefined) {
+                const response = await PersonalDataService.createPersonalData(userId);
+                // console.log('response:', response);
+                personalData = await PersonalDataService.getPersonalData(userId);
+                // console.log('new personalData:', personalData);
+            }
+            
+            // Pack user data
+            const userData = {
+                id: userId,
+                email: userEmail,
+                name: personalData.name,
+                lastname: personalData.lastname,
+                phone: personalData.phone
+            }
+
+            res.render('profile', { title: 'Perfil', script: 'profile.js', logged, userData });
         } catch (e) {
-            console.log(e.message);
-            res.status(413).send(e.message);
+            console.log('Error: ' + e.message);
+            const error = new Error(e.message);
+            error.status = 500;
+            next(error);
         }
     }
 

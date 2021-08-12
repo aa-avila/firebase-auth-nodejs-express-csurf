@@ -1,4 +1,5 @@
-const fbAuth = require('./firebaseConnect');
+const fbModule = require('./firebaseConnect');
+const fbAuth = fbModule.fbAuth;
 
 // isAuth
 const isAuth = async (req, res, next) => {

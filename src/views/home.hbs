@@ -1,16 +1,23 @@
-<h1>Home</h1>
-<h5>Esta página es pública</h5>
-<a href="/profile">Perfil</a>
-<br>
-<a href="/aasdjhg">Recurso inexistente</a>
-<br>
-<a href="/error">Error generado en el servidor</a>
-<br>
-<br>
-<br>
-{{#if logged}}
-    <div class="alert alert-success" role="alert">Estás logueado/a</div>
-{{/if}}
-{{#unless logged}}
-    <div class="alert alert-danger" role="alert">No estás logueado/a. Ingresa o registrate para acceder a tu contenido privado.</div>
-{{/unless}}
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Home</h1>
+            <h5>Esta página es pública</h5>
+            <a href="/profile">Perfil</a>
+            <br>
+            <a href="/aasdjhg">Recurso inexistente</a>
+            <br>
+            <a href="/error">Error generado en el servidor</a>
+            <br>
+            <br>
+            <br>
+            {{#if logged}}
+            <div class="alert alert-success" role="alert">Estás logueado/a</div>
+            {{/if}}
+            {{#unless logged}}
+            <div class="alert alert-danger" role="alert">No estás logueado/a. Ingresa o registrate para acceder a tu
+                contenido privado.</div>
+            {{/unless}}
+        </div>
+    </div>
+</div>

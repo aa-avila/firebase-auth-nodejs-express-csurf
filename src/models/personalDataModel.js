@@ -8,7 +8,7 @@ module.exports = class PersonalDataModel {
         try {
             const data = {
                 name: '-',
-                lastName: '-',
+                lastname: '-',
                 phone: '-'
             }
 

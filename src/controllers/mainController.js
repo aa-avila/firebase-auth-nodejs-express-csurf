@@ -71,8 +71,8 @@ module.exports = class MainCtrl {
         try {
             const idToken = req.body.idToken.toString();
             //const expiresIn = 60 * 60 * 24 * 5 * 1000; //5 days
-            //const expiresIn = 60 * 60 * 1 * 1000; //1 hour
-            const expiresIn = 60 * 5 * 1000; //5 min
+            const expiresIn = 60 * 60 * 1 * 1000; //1 hour
+            //const expiresIn = 60 * 5 * 1000; //5 min
 
             fbAuth
                 .createSessionCookie(idToken, { expiresIn })

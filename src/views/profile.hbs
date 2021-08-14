@@ -4,14 +4,24 @@
             <h1>Perfil</h1>
             <h5>[Esta página es privada]</h5>
             <br>
-            <h4>Datos de usuario:</h4>
-            <br>
-            <p> <strong>ID de usuario: </strong> {{userData.id}}</p>
-            <p> <strong>Email: </strong> {{userData.email}}</p>
-            <p> <strong>Nombre: </strong> {{userData.name}}</p>
-            <p> <strong>Apellido: </strong> {{userData.lastname}}</p>
-            <p> <strong>Telefono: </strong> {{userData.phone}}</p>
-            <br>
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="m-0">Datos de usuario</h5>
+                    <a href="#" class="btn btn-primary">Editar</a>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>ID de usuario: </strong> {{userData.id}}</li>
+                        <li class="list-group-item"><strong>Email: </strong> {{userData.email}}</li>
+                        <li class="list-group-item"><strong>Nombre: </strong> {{userData.name}}</li>
+                        <li class="list-group-item"><strong>Apellido: </strong> {{userData.lastname}}</li>
+                        <li class="list-group-item"><strong>Teléfono: </strong> {{userData.phone}}</li>
+                    </ul>
+                </div>
+            </div>
+
+
+
             <a href="/">Home</a>
             <br>
             <a href="/private-content-2">Otro contenido privado</a>

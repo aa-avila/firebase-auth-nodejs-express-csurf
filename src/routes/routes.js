@@ -9,6 +9,7 @@ router.get('/', isAuthPublic, MainCtrl.index_page);
 router.post('/sessionLogin', MainCtrl.sessionLogin);
 router.get('/sessionLogout', MainCtrl.sessionLogout);
 router.get('/profile', isAuth, MainCtrl.profile_page);
+router.post('profileEdit', isAuth, MainCtrl.updateProfile)
 router.get('/error', MainCtrl.error_gen);
 
 

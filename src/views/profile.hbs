@@ -7,12 +7,16 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="m-0">Datos de usuario</h5>
-                    <a href="#" class="btn btn-primary">Editar</a>
+                    <a href="#" class="btn btn-success" title="Editar" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-pencil-alt"></i></a>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item"><strong>ID de usuario: </strong> {{userData.id}}</li>
-                        <li class="list-group-item"><strong>Email: </strong> {{userData.email}}</li>
+                        <li class="list-group-item list-group-item-info"><strong>ID de usuario: </strong>
+                            {{userData.id}}</li>
+                        <li class="list-group-item list-group-item-info"><strong>Email: </strong> {{userData.email}}
+                        </li>
+                    </ul>
+                    <ul class="list-group mt-2">
                         <li class="list-group-item"><strong>Nombre: </strong> {{userData.name}}</li>
                         <li class="list-group-item"><strong>Apellido: </strong> {{userData.lastname}}</li>
                         <li class="list-group-item"><strong>Teléfono: </strong> {{userData.phone}}</li>
@@ -20,12 +24,45 @@
                 </div>
             </div>
 
+            <div class="mt-4">
+                <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Home</a>
+                <a href="/private-content-2" class="btn btn-primary">Otro contenido privado</a>
+            </div>
 
+        </div>
+    </div>
+</div>
 
-            <a href="/">Home</a>
-            <br>
-            <a href="/private-content-2">Otro contenido privado</a>
-            <br>
+<!-- Modal Edit-->
+<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Editar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="profileEdit" method="post" id="editProfile-form">
+                    <div class="form-group">
+                        <label for="editProfile-name">Nombre</label>
+                        <input type="text" id="editProfile-name" class="form-control" placeholder="{{userData.name}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProfile-lastname">Apellido</label>
+                        <input type="text" id="editProfile-lastname" class="form-control" placeholder="{{userData.lastname}}"/>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">
+                        Guardar
+                    </button>
+                </form>
+                <div class="d-flex justify-content-center p-1">
+                    <span id="editProfileMsg"></span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

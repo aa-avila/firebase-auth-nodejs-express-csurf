@@ -47,7 +47,7 @@ module.exports = class MainCtrl {
                 personalData = await PersonalDataService.getPersonalData(userId);
                 // console.log('new personalData:', personalData);
             }
-            
+
             // Pack user data
             const userData = {
                 id: userId,
@@ -58,6 +58,21 @@ module.exports = class MainCtrl {
             }
 
             res.render('profile', { title: 'Perfil', script: 'profile.js', logged, userData });
+        } catch (e) {
+            console.log('Error: ' + e.message);
+            const error = new Error(e.message);
+            error.status = 500;
+            next(error);
+        }
+    }
+
+    // Update Pofile (personal data)
+    static async updateProfile(req, res, next) {
+        try {
+            const logged = req.logged;
+
+            //res.render('home', { title: 'Home', script: 'home.js', logged });
+            res.send("OK");
         } catch (e) {
             console.log('Error: ' + e.message);
             const error = new Error(e.message);

@@ -1,5 +1,6 @@
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
+const bodyParser = require('body-parser')
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -26,12 +27,13 @@ app.set('view engine', '.hbs');
 
 /*********************/
 // MIDDLEWARES
-const csrfMiddleware = csrf({ cookie: true });
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(csrfMiddleware); // proteccion csrf en cada peticion
 app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cookieParser());
+const csrfMiddleware = csrf({ cookie: true });
+app.use(csrfMiddleware); // proteccion csrf en cada peticion
+
 
 // csrfToken
 app.all('*', (req, res, next) => {

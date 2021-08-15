@@ -57,7 +57,9 @@ module.exports = class MainCtrl {
                 phone: personalData.phone
             }
 
-            res.render('profile', { title: 'Perfil', script: 'profile.js', logged, userData });
+            const csrfToken = req.csrfToken();
+
+            res.render('profile', { title: 'Perfil', script: 'profile.js', logged, userData, csrfToken });
         } catch (e) {
             console.log('Error: ' + e.message);
             const error = new Error(e.message);
@@ -69,10 +71,29 @@ module.exports = class MainCtrl {
     // Update Pofile (personal data)
     static async updateProfile(req, res, next) {
         try {
-            const logged = req.logged;
+            // Get current user & form data
+            const userId = req.userId;
+            const body = req.body;
 
-            //res.render('home', { title: 'Home', script: 'home.js', logged });
-            res.send("OK");
+            // Pack personalData
+            const data = {
+                name: body.editProfile_name,
+                lastname: body.editProfile_lastname,
+                phone: body.editProfile_phone,
+            }
+
+            /** AGREGAR VERIFICACION DE DATOS
+             * Si no hay datos en los caampos, obtener datos existentes en BD
+             * (se pueden traer directo desde el front en el formulario como HIDEDN
+             * para asi evitar una nueva query a la DB)
+             * 
+             * Procesar para que siempre quede mayuscula la primera letra y minuscula el resto
+             * 
+             */
+
+            await PersonalDataService.updatePersonalData(userId, data);
+
+            res.redirect('/profile');
         } catch (e) {
             console.log('Error: ' + e.message);
             const error = new Error(e.message);

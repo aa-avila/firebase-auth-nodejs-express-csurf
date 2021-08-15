@@ -7,7 +7,8 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="m-0">Datos de usuario</h5>
-                    <a href="#" class="btn btn-success" title="Editar" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="#" class="btn btn-success" title="Editar" data-toggle="modal"
+                        data-target="#editProfileModal"><i class="fas fa-pencil-alt"></i></a>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -46,14 +47,22 @@
             </div>
 
             <div class="modal-body">
-                <form action="profileEdit" method="post" id="editProfile-form">
+                <form action="/profileEdit" method="post" id="editProfile-form">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                     <div class="form-group">
                         <label for="editProfile-name">Nombre</label>
-                        <input type="text" id="editProfile-name" class="form-control" placeholder="{{userData.name}}"/>
+                        <input type="text" id="editProfile-name" name="editProfile_name" class="form-control"
+                            placeholder="{{userData.name}}" />
                     </div>
                     <div class="form-group">
                         <label for="editProfile-lastname">Apellido</label>
-                        <input type="text" id="editProfile-lastname" class="form-control" placeholder="{{userData.lastname}}"/>
+                        <input type="text" id="editProfile-lastname" name="editProfile_lastname" class="form-control"
+                            placeholder="{{userData.lastname}}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="editProfile-phone">Teléfono</label>
+                        <input type="text" id="editProfile-phone" name="editProfile_phone" class="form-control"
+                            placeholder="{{userData.phone}}" />
                     </div>
                     <button type="submit" class="btn btn-success btn-block">
                         Guardar

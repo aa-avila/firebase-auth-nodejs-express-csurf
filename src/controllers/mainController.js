@@ -2,9 +2,11 @@ const fbModule = require('../firebaseConnect');
 const fbAuth = fbModule.fbAuth;
 const PersonalDataService = require('../services/personalDataService');
 
+/** Funcion capitalizar string */
 function PrimeraLetraMayuscula(string){
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
 
 module.exports = class MainCtrl {
     // modelo generador de error
@@ -101,13 +103,14 @@ module.exports = class MainCtrl {
                 } 
             }
 
-            /** mayuscula la primera letra y minuscula el resto */
+            /** Mayuscula la primera letra y minuscula el resto */
+            const nameCapitalized = PrimeraLetraMayuscula(newData.name);
+            newData.name = nameCapitalized;
+            const lastnameCapitalized = PrimeraLetraMayuscula(newData.lastname);
+            newData.lastname = lastnameCapitalized;
+            console.log(newData);
 
-            const name = PrimeraLetraMayuscula(newData.name);
-            console.log(name);
-            //const lastname = PrimeraLetraMayuscula(newData.lastname);
-            //console.log(lastname);
-
+            /** Actualizar BD */
             await PersonalDataService.updatePersonalData(userId, newData);
 
             res.redirect('/profile');

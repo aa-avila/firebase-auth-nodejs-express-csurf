@@ -2,6 +2,10 @@ const fbModule = require('../firebaseConnect');
 const fbAuth = fbModule.fbAuth;
 const PersonalDataService = require('../services/personalDataService');
 
+function PrimeraLetraMayuscula(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 module.exports = class MainCtrl {
     // modelo generador de error
     static async error_gen(req, res, next) {
@@ -76,22 +80,35 @@ module.exports = class MainCtrl {
             const body = req.body;
 
             // Pack personalData
-            const data = {
+            let newData = {
                 name: body.editProfile_name,
                 lastname: body.editProfile_lastname,
                 phone: body.editProfile_phone,
             }
 
-            /** AGREGAR VERIFICACION DE DATOS
-             * Si no hay datos en los caampos, obtener datos existentes en BD
-             * (se pueden traer directo desde el front en el formulario como HIDEDN
-             * para asi evitar una nueva query a la DB)
-             * 
-             * Procesar para que siempre quede mayuscula la primera letra y minuscula el resto
-             * 
-             */
+            /** Si no hay datos en los campos enviados desde el form, obtener datos existentes en BD */
+            if (newData.name === '' || newData.lastname === '' || newData. phone === '') {
+                const currentData = await PersonalDataService.getPersonalData(userId);
 
-            await PersonalDataService.updatePersonalData(userId, data);
+                if (newData.name === '') {
+                    newData.name = currentData.name;
+                }
+                if (newData.lastname === '') {
+                    newData.lastname = currentData.lastname;
+                }
+                if (newData.phone === '') {
+                    newData.phone = currentData.phone;
+                } 
+            }
+
+            /** mayuscula la primera letra y minuscula el resto */
+
+            const name = PrimeraLetraMayuscula(newData.name);
+            console.log(name);
+            //const lastname = PrimeraLetraMayuscula(newData.lastname);
+            //console.log(lastname);
+
+            await PersonalDataService.updatePersonalData(userId, newData);
 
             res.redirect('/profile');
         } catch (e) {

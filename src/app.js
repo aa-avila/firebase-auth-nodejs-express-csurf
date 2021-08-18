@@ -1,6 +1,5 @@
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
-const bodyParser = require('body-parser')
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');

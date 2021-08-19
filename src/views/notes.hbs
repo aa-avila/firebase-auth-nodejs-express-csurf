@@ -1,0 +1,26 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Notas</h1>
+            <h5>[Esta página es privada]</h5>
+            <br>
+            <p>{{userId}}</p>
+            <br>
+            <p>{{csrfToken}}</p>
+            <br>
+            <div>
+                {{#each notes}}
+                <p>{{title}}</p>
+                <p>{{description}}</p>
+                {{/each}}
+            </div>
+            
+
+            <div class="mt-4">
+                <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Home</a>
+                <a href="/profile" class="btn btn-primary">Perfil</a>
+            </div>
+
+        </div>
+    </div>
+</div>

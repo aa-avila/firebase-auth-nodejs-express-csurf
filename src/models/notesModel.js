@@ -6,6 +6,7 @@
 
 const fbModule = require('../firebaseConnect');
 const db = fbModule.db;
+const FieldValue = fbModule.FieldValue;
 
 module.exports = class NotesModel {
     /** getAllNotes */
@@ -33,7 +34,7 @@ module.exports = class NotesModel {
         try {
             const noteRef = db.collection('users/' + uid + '/notes').doc('noteId');
             const noteData = await noteRef.get();
-            console.log(noteData);
+            //console.log(noteData);
 
             return noteData;
         } catch (error) {
@@ -52,9 +53,13 @@ module.exports = class NotesModel {
             const response = await newDocRef.set({
                 title: data.title,
                 description: data.description,
-                id: newDocRef.id,
-                time: Firestore.Timestamp.now()
-            })
+                id: newDocRef.id
+            });
+
+            // Update the timestamp field with the value from the server
+            // const res = await newDocRef.update({
+            //     timestamp: FieldValue.serverTimestamp()
+            // });
 
             return response;
         } catch (error) {

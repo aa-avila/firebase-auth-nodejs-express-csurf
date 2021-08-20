@@ -16,8 +16,8 @@ router.get('/profile', isAuth, ProfileCtrl.profile_page);
 router.post('/profileEdit', isAuth, ProfileCtrl.updateProfile)
 
 router.get('/notes', isAuth, NotesCtrl.notes_page);
-//router.get('/note/:id', isAuth, NotesCtrl.getNote);
-//router.post('/note/:id', isAuth, NotesCtrl.newNote);
+router.post('/notes', isAuth, NotesCtrl.addNote);
+//router.get('/notes/:id', isAuth, NotesCtrl.getNote);
 //router.put('/note/:id', isAuth, NotesCtrl.updateNote);
 
 

@@ -5,7 +5,7 @@ module.exports = class NotesService {
     static async getAllNotes(uid) {
         try {
             // get notes
-            let notesData = await NotesModel.getAllNotes(uid);
+            const notesData = await NotesModel.getAllNotes(uid);
 
             return notesData;
         } catch (error) {
@@ -13,4 +13,16 @@ module.exports = class NotesService {
             return error.message;
         }
     }
+
+        /** addNote */
+        static async addNote(uid, data) {
+            try {
+                const response = await NotesModel.addNote(uid, data);
+    
+                return response;
+            } catch (error) {
+                console.log(error.message);
+                return error.message;
+            }
+        }
 }

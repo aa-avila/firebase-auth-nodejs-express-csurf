@@ -51,14 +51,16 @@
                 </div>
                
                 <div class="modal-body">
-                    <form action="" id="newNote-form">
+                    <form action="/notes" method="POST" id="newNote-form">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+
                         <div class="form-group">
                             <label for="newNote-title">Título</label>
-                            <input type="text" id="newNote-title" class="form-control" placeholder="Título"/>
+                            <input type="text" name="newNote_title" id="newNote-title" class="form-control" placeholder="Título"/>
                         </div>
                         <div class="form-group">
                             <label for="newNote-desc">Descripción</label>
-                            <textarea name="description" id="newNote-desc" cols="30" rows="6" class="form-control"></textarea>
+                            <textarea name="newNote_desc" id="newNote-desc" cols="30" rows="6" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-success btn-block">
                             Guardar

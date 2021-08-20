@@ -8,19 +8,66 @@
             <br>
             <p>{{csrfToken}}</p>
             <br>
-            <div>
+
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#newNoteModal"><i class="fas fa-plus"></i> Nueva nota</button>
+            </div>
+
+            <div class="card-columns mt-4">
                 {{#each notes}}
-                <p>{{title}}</p>
-                <p>{{description}}</p>
+                <div class="card border border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">{{title}}</h5>
+                        <p class="card-text">{{description}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-info"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+
+                    </div>
+                </div>
                 {{/each}}
             </div>
-            
 
             <div class="mt-4">
                 <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Home</a>
-                <a href="/profile" class="btn btn-primary">Perfil</a>
+                <a href="/profile" class="btn btn-primary"><i class="fas fa-user"></i> Perfil</a>
             </div>
 
         </div>
     </div>
 </div>
+
+<!-- Modal newNote-->
+    <div class="modal fade" id="newNoteModal" tabindex="-1" role="dialog" aria-labelledby="newNoteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newNoteModalLabel">Nueva nota</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+               
+                <div class="modal-body">
+                    <form action="" id="newNote-form">
+                        <div class="form-group">
+                            <label for="newNote-title">Título</label>
+                            <input type="text" id="newNote-title" class="form-control" placeholder="Título"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="newNote-desc">Descripción</label>
+                            <textarea name="description" id="newNote-desc" cols="30" rows="6" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">
+                            Guardar
+                        </button>
+                    </form>
+                    <div class="d-flex justify-content-center p-1">
+                        <span id="newNoteMsg"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

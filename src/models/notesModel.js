@@ -20,7 +20,7 @@ module.exports = class NotesModel {
                 notesData.push(doc.data());
             });
 
-            console.log(notesData);
+            //console.log(notesData);
 
             return notesData;
         } catch (error) {
@@ -30,9 +30,9 @@ module.exports = class NotesModel {
     }
 
     /** getNote */
-    static async getNote(uid, noteId) {
+    static async getNote(uid, id) {
         try {
-            const noteRef = db.collection('users/' + uid + '/notes').doc('noteId');
+            const noteRef = db.collection('users/' + uid + '/notes').doc(id);
             const noteData = await noteRef.get();
             //console.log(noteData);
 
@@ -60,6 +60,36 @@ module.exports = class NotesModel {
             // const res = await newDocRef.update({
             //     timestamp: FieldValue.serverTimestamp()
             // });
+
+            return response;
+        } catch (error) {
+            console.log(error.message);
+            return error.message;
+        }
+    }
+
+    /** updateNote */
+    static async updateNote(uid, id, data) {
+        try {
+            const noteRef = db.collection('users/' + uid + '/notes').doc(id);
+            const response = await noteRef.update({
+                title: data.title,
+                description: data.description,
+            });
+
+            return response;
+        } catch (error) {
+            console.log(error.message);
+            return error.message;
+        }
+    }
+
+
+    /** deleteNote */
+    static async deleteNote(uid, id) {
+        try {
+            const noteRef = db.collection('users/' + uid + '/notes').doc(id);
+            const response = await noteRef.delete();
 
             return response;
         } catch (error) {

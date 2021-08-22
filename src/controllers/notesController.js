@@ -1,3 +1,4 @@
+const cookieParser = require("cookie-parser");
 const NotesService = require("../services/notesService");
 
 module.exports = class NotesCtrl {
@@ -49,8 +50,8 @@ module.exports = class NotesCtrl {
             const formData = req.body;
 
             const noteData = {
-                title: formData.newNote_title,
-                description: formData.newNote_desc
+                title: formData.title,
+                description: formData.description
             }
 
             const response = await NotesService.addNote(userId, noteData);
@@ -74,13 +75,11 @@ module.exports = class NotesCtrl {
             const noteId = req.params.id;
 
             const noteData = {
-                title: body.note_title,
-                description: body.note_desc
+                title: body.title,
+                description: body.description
             }
 
             const response = await NotesService.updateNote(userId, noteId, noteData);
-
-            res.redirect('/notes');
         } catch (e) {
             console.log('Error: ' + e.message);
             const error = new Error(e.message);

@@ -21,7 +21,7 @@
                         <p class="card-text">{{description}}</p>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-info"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-info" onclick="handleEditNote_cardBtn('{{id}}', '{{title}}', '{{description}}')"  data-toggle="modal" data-target="#editNoteModal"><i class="fas fa-pencil-alt"></i></button>
                         <button class="btn btn-danger" onclick="handleDeleteNote('{{id}}')"><i class="fas fa-trash"></i></button>
 
                     </div>
@@ -56,11 +56,11 @@
 
                         <div class="form-group">
                             <label for="newNote-title">Título</label>
-                            <input type="text" name="newNote_title" id="newNote-title" class="form-control" placeholder="Título"/>
+                            <input type="text" name="title" id="newNote-title" class="form-control" placeholder="Título"/>
                         </div>
                         <div class="form-group">
                             <label for="newNote-desc">Descripción</label>
-                            <textarea name="newNote_desc" id="newNote-desc" cols="30" rows="6" class="form-control"></textarea>
+                            <textarea name="description" id="newNote-desc" cols="30" rows="6" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-success btn-block">
                             Guardar
@@ -68,6 +68,40 @@
                     </form>
                     <div class="d-flex justify-content-center p-1">
                         <span id="newNoteMsg"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal editNote-->
+    <div class="modal fade" id="editNoteModal" tabindex="-1" role="dialog" aria-labelledby="editNoteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editNoteModalLabel">Editar nota</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+               
+                <div class="modal-body">
+                    <form action="" id="editNote-form">
+                        <div class="form-group">
+                            <label for="editNote-title">Título</label>
+                            <input type="text" name="title" id="editNote-title" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="editNote-desc">Descripción</label>
+                            <textarea name="description" id="editNote-desc" cols="30" rows="6" class="form-control" value="Description"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block" onclick="handleEditNote_submit()" >
+                            Guardar
+                        </button>
+                    </form>
+                    <div class="d-flex justify-content-center p-1">
+                        <span id="editNoteMsg"></span>
                     </div>
                 </div>
             </div>

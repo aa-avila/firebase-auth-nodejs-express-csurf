@@ -49,6 +49,8 @@ module.exports = class NotesCtrl {
             const userId = req.userId;
             const formData = req.body;
 
+            // console.log(formData);
+
             const noteData = {
                 title: formData.title,
                 description: formData.description
@@ -80,6 +82,8 @@ module.exports = class NotesCtrl {
             }
 
             const response = await NotesService.updateNote(userId, noteId, noteData);
+
+            res.send(response);
         } catch (e) {
             console.log('Error: ' + e.message);
             const error = new Error(e.message);

@@ -3,8 +3,13 @@
         <div class="col-md-8 offset-md-2">
             <h1>Perfil</h1>
             <h5>[Esta página es privada]</h5>
-            <br>
-            <div class="card">
+
+            <div class="mt-4">
+                <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Home</a>
+                <a href="/notes" class="btn btn-primary"><i class="fas fa-sticky-note"></i> Notas</a>
+            </div>
+
+            <div class="card mt-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="m-0">Datos de usuario</h5>
                     <a href="#" class="btn btn-success" title="Editar" data-toggle="modal"
@@ -12,9 +17,12 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-info"><strong>Nombre: </strong> {{userData.name}}</li>
-                        <li class="list-group-item list-group-item-info"><strong>Apellido: </strong> {{userData.lastname}}</li>
-                        <li class="list-group-item list-group-item-info"><strong>Teléfono: </strong> {{userData.phone}}</li>
+                        <li class="list-group-item list-group-item-info"><strong>Nombre: </strong> {{userData.name}}
+                        </li>
+                        <li class="list-group-item list-group-item-info"><strong>Apellido: </strong>
+                            {{userData.lastname}}</li>
+                        <li class="list-group-item list-group-item-info"><strong>Teléfono: </strong> {{userData.phone}}
+                        </li>
                     </ul>
                     <ul class="list-group mt-2">
                         <li class="list-group-item"><strong>ID de usuario: </strong>
@@ -24,12 +32,6 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="mt-4">
-                <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Home</a>
-                <a href="/notes" class="btn btn-primary"><i class="fas fa-sticky-note"></i> Notas</a>
-            </div>
-
         </div>
     </div>
 </div>

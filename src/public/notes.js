@@ -1,34 +1,40 @@
 /** Select CSRF Token */
+/*
 let csrfToken = '';
 const getCsrfToken = () => {
     csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     console.log(csrfToken);
 }
+*/
 
-//
+
+/** Handle EDIT note (card button) */
 let currentNoteId = '';
 let currentNoteTitle = '';
 let currentNoteDescription = '';
-//
 
-/** Handle EDIT note (card button) */
 const handleEditNote_cardBtn = async (id, title, description) => {
     currentNoteId = id;
     currentNoteTitle = title;
     currentNoteDescription = description;
 
     document.querySelector('#editNote-title').value = title;
+    document.querySelector('#editNote-desc').value = description;
 }
 
 /** Handle EDIT note (submit form) */
-const handleEditNote_submit = async () => {
+const editNoteForm = document.querySelector("#editNote-form");
+
+editNoteForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
     // Armar url host/notes/id
     const url = '/notes/' + currentNoteId;
     // const url = window.location.href + '/' + id;
 
     /** get form values */
-    const editNoteTitle = document.querySelector('#editNote-title');
-    const editNoteDescription = document.querySelector('#editNote-desc');
+    const editNoteTitle = document.querySelector('#editNote-title').value;
+    const editNoteDescription = document.querySelector('#editNote-desc').value;
 
     /** Pack data */
     const data = {
@@ -41,7 +47,7 @@ const handleEditNote_submit = async () => {
 
     // Recargar /notes
     window.location.reload();
-}
+});
 
 /** Handle DELETE note */
 const handleDeleteNote = async (id) => {
@@ -56,13 +62,8 @@ const handleDeleteNote = async (id) => {
     window.location.reload();
 }
 
-
-
-
-
+/************************************************* */
 window.addEventListener("DOMContentLoaded", () => {
     console.log('Hola en notes');
-    getCsrfToken();
-
-
+    // getCsrfToken();
 });

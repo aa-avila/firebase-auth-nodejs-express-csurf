@@ -1,4 +1,3 @@
-const cookieParser = require("cookie-parser");
 const NotesService = require("../services/notesService");
 
 module.exports = class NotesCtrl {

@@ -1,12 +1,6 @@
-// - getAllNotes
-// - getNote
-// - addNote
-// - updateNote
-// - deleteNote
-
 const fbModule = require('../firebaseConnect');
 const db = fbModule.db;
-const FieldValue = fbModule.FieldValue;
+const admin = fbModule.admin;
 
 module.exports = class NotesModel {
     /** getAllNotes */
@@ -46,20 +40,16 @@ module.exports = class NotesModel {
     /** addNote */
     static async addNote(uid, data) {
         try {
-
             // const response = await db.collection('users/' + uid + '/notes').add(data);
 
             const newDocRef = db.collection('users/' + uid + '/notes').doc();
             const response = await newDocRef.set({
                 title: data.title,
                 description: data.description,
-                id: newDocRef.id
+                id: newDocRef.id,
+                created: admin.firestore.FieldValue.serverTimestamp(),
+                updated: admin.firestore.FieldValue.serverTimestamp()
             });
-
-            // Update the timestamp field with the value from the server
-            // const res = await newDocRef.update({
-            //     timestamp: FieldValue.serverTimestamp()
-            // });
 
             return response;
         } catch (error) {
@@ -75,6 +65,7 @@ module.exports = class NotesModel {
             const response = await noteRef.update({
                 title: data.title,
                 description: data.description,
+                updated: admin.firestore.FieldValue.serverTimestamp()
             });
 
             return response;
@@ -83,7 +74,6 @@ module.exports = class NotesModel {
             return error.message;
         }
     }
-
 
     /** deleteNote */
     static async deleteNote(uid, id) {

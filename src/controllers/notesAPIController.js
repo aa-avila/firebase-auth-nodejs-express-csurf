@@ -1,8 +1,8 @@
 const NotesService = require("../services/notesService");
 
 module.exports = class NotesCtrl {
-    /** Notes Page */
-    static async notes_page(req, res, next) {
+    /** Get All Notes */
+    static async getAllNotes(req, res) {
         try {
             // Auth state & current user id
             const logged = req.logged;
@@ -12,37 +12,33 @@ module.exports = class NotesCtrl {
             const notes = await NotesService.getAllNotes(userId);
 
             /** Pasa el csrfToken a la pagina (acciones notes) */
-            const csrfToken = req.csrfToken();
+            // const csrfToken = req.csrfToken();
 
-            res.render('notes', { title: 'Notas', script: 'notes.js', logged, userId, notes, csrfToken });
+            res.send(notes);
         } catch (e) {
             console.log('Error: ' + e.message);
-            const error = new Error(e.message);
-            error.status = 500;
-            next(error);
+            res.status(500).send({'Error': e.message})
         }
     }
 
     /** Get Note */
-    static async getNote(req, res, next) {
+    static async getNote(req, res) {
         try {
             // Auth state & current user id
             const userId = req.userId;
             const noteId = req.params.id;
 
-            const response = await NotesService.getNote(userId, noteId);
+            const note = await NotesService.getNote(userId, noteId);
 
-            res.send(response);
+            res.send(note);
         } catch (e) {
             console.log('Error: ' + e.message);
-            const error = new Error(e.message);
-            error.status = 500;
-            next(error);
+            res.status(500).send({'Error': e.message})
         }
     }
 
     /** Add Note */
-    static async addNote(req, res, next) {
+    static async addNote(req, res) {
         try {
             // Auth state & current user id
             const userId = req.userId;
@@ -57,17 +53,15 @@ module.exports = class NotesCtrl {
 
             const response = await NotesService.addNote(userId, noteData);
 
-            res.redirect('/notes');
+            res.send(response);
         } catch (e) {
             console.log('Error: ' + e.message);
-            const error = new Error(e.message);
-            error.status = 500;
-            next(error);
+            res.status(500).send({'Error': e.message})
         }
     }
 
     /** Update Note */
-    static async updateNote(req, res, next) {
+    static async updateNote(req, res) {
         try {
             // Auth state & current user id
             const userId = req.userId;
@@ -85,14 +79,12 @@ module.exports = class NotesCtrl {
             res.send(response);
         } catch (e) {
             console.log('Error: ' + e.message);
-            const error = new Error(e.message);
-            error.status = 500;
-            next(error);
+            res.status(500).send({'Error': e.message})
         }
     }
 
         /** Delete Note */
-        static async deleteNote(req, res, next) {
+        static async deleteNote(req, res) {
             try {
                 // Auth state & current user id
                 const userId = req.userId;
@@ -103,9 +95,7 @@ module.exports = class NotesCtrl {
                 res.send(response);
             } catch (e) {
                 console.log('Error: ' + e.message);
-                const error = new Error(e.message);
-                error.status = 500;
-                next(error);
+                res.status(500).send({'Error': e.message})
             }
         }
 }

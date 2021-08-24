@@ -30,7 +30,7 @@ module.exports = class NotesModel {
             const noteData = await noteRef.get();
             //console.log(noteData);
 
-            return noteData;
+            return noteData.data();
         } catch (error) {
             console.log(error.message);
             return error.message;

@@ -4,7 +4,11 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const morgan = require('morgan');
-const routes = require('./routes/routes');
+
+const mainRoutes = require('./routes/mainRoutes');
+const profileRoutes = require('./routes/profileRoutes');
+const notesRoutes = require('./routes/notesRoutes');
+const notesAPIRoutes = require('./routes/notesAPIRoutes');
 
 
 /*********************/
@@ -42,7 +46,12 @@ app.all('*', (req, res, next) => {
 
 /*********************/
 // ROUTES
-app.use(routes);
+app.use('/', mainRoutes);
+app.use('/', profileRoutes);
+app.use('/', notesRoutes);
+app.use('/api/', notesAPIRoutes);
+
+
 
 
 /*********************/
@@ -57,16 +66,16 @@ app.use((req, res, next) => {
     const error = new Error("El recurso solicitado no existe.");
     error.status = 404;
     next(error);
-  });
-  
-  // Error handler
-  app.use((error, req, res, next) => {
-      if (error.status) {
-      res.status(error.status).render('error', {layout: 'errorLayout', title: 'Error ' + error.status, errorStatus: error.status, errorMsg: error.message});
-      } else {
-      res.status(500).render('error', {layout: 'errorLayout', title: 'Error 500', errorStatus: 500, errorMsg: 'Internal Server Error.'});
-      }
-    });
+});
+
+// Error handler
+app.use((error, req, res, next) => {
+    if (error.status) {
+        res.status(error.status).render('error', { layout: 'errorLayout', title: 'Error ' + error.status, errorStatus: error.status, errorMsg: error.message });
+    } else {
+        res.status(500).render('error', { layout: 'errorLayout', title: 'Error 500', errorStatus: 500, errorMsg: 'Internal Server Error.' });
+    }
+});
 
 
 /*********************/

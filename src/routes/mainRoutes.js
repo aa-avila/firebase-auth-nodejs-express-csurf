@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const MainCtrl = require('../controllers/mainController');
-const isAuthPublic = require('../checkAuthPublic');
+const isAuthPublic = require('../auth/checkAuthPublic');
 
 router.get('/', isAuthPublic, MainCtrl.index_page);
 router.post('/sessionLogin', MainCtrl.sessionLogin);

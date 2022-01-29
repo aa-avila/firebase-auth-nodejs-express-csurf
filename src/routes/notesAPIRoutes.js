@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const NotesCtrl = require('../controllers/notesAPIController');
-const isAuth = require('../checkAuth');
+const isAuth = require('../auth/checkAuth');
 
 router.get('/notes', isAuth, NotesCtrl.getAllNotes);
 router.post('/notes', isAuth, NotesCtrl.addNote);

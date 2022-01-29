@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const ProfileCtrl = require('../controllers/profileController');
-const isAuth = require('../checkAuth');
+const isAuth = require('../auth/checkAuth');
 
 router.get('/profile', isAuth, ProfileCtrl.profile_page);
-router.post('/profileEdit', isAuth, ProfileCtrl.updateProfile)
+router.post('/profileEdit', isAuth, ProfileCtrl.updateProfile);
 
 module.exports = router;

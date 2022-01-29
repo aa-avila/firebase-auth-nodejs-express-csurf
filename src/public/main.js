@@ -1,12 +1,12 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', () => {
   // FIREBASE
   const firebaseConfig = {
-    apiKey: "AIzaSyALrC_0YGPOfQnVb_TN0QIt-CqFQUC1KhI",
-    authDomain: "fir-auth-nodejs-express.firebaseapp.com",
-    projectId: "fir-auth-nodejs-express",
-    storageBucket: "fir-auth-nodejs-express.appspot.com",
-    messagingSenderId: "472249787813",
-    appId: "1:472249787813:web:ae7664b0c7bc186e53344c",
+    apiKey: 'AIzaSyALrC_0YGPOfQnVb_TN0QIt-CqFQUC1KhI',
+    authDomain: 'fir-auth-nodejs-express.firebaseapp.com',
+    projectId: 'fir-auth-nodejs-express',
+    storageBucket: 'fir-auth-nodejs-express.appspot.com',
+    messagingSenderId: '472249787813',
+    appId: '1:472249787813:web:ae7664b0c7bc186e53344c'
   };
 
   firebase.initializeApp(firebaseConfig);
@@ -21,16 +21,16 @@ window.addEventListener("DOMContentLoaded", () => {
   const sessionLogin = (user) => {
     console.log(user.uid);
     return user.getIdToken().then((idToken) => {
-      return fetch("/sessionLogin", {
-        method: "POST",
+      return fetch('/sessionLogin', {
+        method: 'POST',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'CSRF-Token': Cookies.get('XSRF-TOKEN')
         },
         body: JSON.stringify({
-          idToken,
-        }),
+          idToken
+        })
       });
     });
   };
@@ -47,10 +47,10 @@ window.addEventListener("DOMContentLoaded", () => {
         return fbAuth.signOut();
       })
       .then(() => {
-        window.location.assign("/profile");
+        window.location.assign('/profile');
       })
       .catch((error) => {
-        console.log("Error en login:", error);
+        console.log('Error en login:', error);
 
         const loginMsg = document.getElementById('loginMsg');
         loginMsg.innerHTML = 'Email y/o contraseña inválidos';
@@ -69,7 +69,7 @@ window.addEventListener("DOMContentLoaded", () => {
         return fbAuth.signOut();
       })
       .then(() => {
-        window.location.assign("/profile");
+        window.location.assign('/notes');
       })
       .catch((err) => {
         console.log(err);
@@ -78,13 +78,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //*********************************************************/
   // LOGIN -> Email and Password
-  const loginForm = document.querySelector("#login-form");
+  const loginForm = document.querySelector('#login-form');
 
-  loginForm.addEventListener("submit", (e) => {
+  loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const email = document.querySelector("#login-email").value;
-    const password = document.querySelector("#login-password").value;
+    const email = document.querySelector('#login-email').value;
+    const password = document.querySelector('#login-password').value;
 
     fbAuth_signInWithEmail(email, password);
 
@@ -92,10 +92,10 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // LOGIN -> GOOGLE SIGNIN
-  const googleBtn_signin = document.querySelector("#googleLogin");
+  const googleBtn_signin = document.querySelector('#googleLogin');
 
-  googleBtn_signin.addEventListener("click", () => {
-    console.log("google click");
+  googleBtn_signin.addEventListener('click', () => {
+    console.log('google click');
 
     const googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -103,10 +103,10 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // LOGIN -> FACEBOOK SIGNIN
-  const facebookBtn_signin = document.querySelector("#facebookLogin");
+  const facebookBtn_signin = document.querySelector('#facebookLogin');
 
-  facebookBtn_signin.addEventListener("click", () => {
-    console.log("facebook click");
+  facebookBtn_signin.addEventListener('click', () => {
+    console.log('facebook click');
 
     const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
@@ -115,13 +115,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //*********************************************************/
   // SIGNUP -> EMAIL
-  const signupForm = document.querySelector("#signup-form");
+  const signupForm = document.querySelector('#signup-form');
 
-  signupForm.addEventListener("submit", (e) => {
+  signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const email = document.querySelector("#signup-email").value;
-    const password = document.querySelector("#signup-password").value;
+    const email = document.querySelector('#signup-email').value;
+    const password = document.querySelector('#signup-password').value;
 
     fbAuth
       .createUserWithEmailAndPassword(email, password)
@@ -132,11 +132,11 @@ window.addEventListener("DOMContentLoaded", () => {
         return fbAuth.signOut();
       })
       .then(() => {
-        window.location.assign("/profile");
+        window.location.assign('/notes');
       })
       .catch((error) => {
-        console.log("Error en signup:", error);
-        
+        console.log('Error en signup:', error);
+
         const signupMsg = document.getElementById('signupMsg');
         signupMsg.innerHTML = 'Email y/o contraseña inválidos';
       });
@@ -144,10 +144,10 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // SIGNUP -> GOOGLE
-  const googleBtn_signup = document.querySelector("#googleSignup");
+  const googleBtn_signup = document.querySelector('#googleSignup');
 
-  googleBtn_signup.addEventListener("click", () => {
-    console.log("google click");
+  googleBtn_signup.addEventListener('click', () => {
+    console.log('google click');
 
     const googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -155,10 +155,10 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // SIGNUP -> FACEBOOK
-  const facebookBtn_signup = document.querySelector("#facebookSignup");
+  const facebookBtn_signup = document.querySelector('#facebookSignup');
 
-  facebookBtn_signup.addEventListener("click", () => {
-    console.log("facebook click");
+  facebookBtn_signup.addEventListener('click', () => {
+    console.log('facebook click');
 
     const facebookProvider = new firebase.auth.FacebookAuthProvider();
 

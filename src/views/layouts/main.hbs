@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css"
         integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css" />
-    
+
     <script src="https://kit.fontawesome.com/cee8507c40.js" crossorigin="anonymous"></script>
 </head>
 
@@ -17,7 +17,10 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="/">Firebase Auth + ExpressJS</a>
+            <span>
+                <i class="navbar-brand far fa-lightbulb"></i>
+                <a class="navbar-brand" href="/">Another Notes App</a>
+            </span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,15 +29,19 @@
                 <ul class="navbar-nav ml-auto">
                     {{#unless logged}}
                     <li class="nav-item" id="login">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Ingresar</a>
+
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">
+                            <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Ingresar</a>
                     </li>
                     <li class="nav-item" id="signup">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">Registrarse</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal">
+                            <i class="fas fa-user-plus"></i>&nbsp;&nbsp;Registrarse</a>
                     </li>
                     {{/unless}}
                     {{#if logged}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/sessionLogout" id="logout">Salir</a>
+                        <a class="nav-link" href="/sessionLogout" id="logout"><i
+                                class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Salir</a>
                     </li>
                     {{/if}}
                 </ul>
@@ -52,7 +59,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Ingresar</h5>
+                    <h5 class="modal-title" id="loginModalLabel"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Ingresar
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -98,7 +106,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="signupModalLabel">Registrarse</h5>
+                    <h5 class="modal-title" id="signupModalLabel"><i
+                            class="fas fa-user-plus"></i>&nbsp;&nbsp;Registrarse</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

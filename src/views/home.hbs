@@ -1,13 +1,21 @@
-<div class="container p-4">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1>Home</h1>
+<div class="d-flex justify-content-center h-100">
+    <div class="d-flex flex-column justify-content-between p-4" style="max-width:630px;">
 
-            <div class="mt-4">
-                <a href="/profile" class="btn btn-primary"><i class="fas fa-user"></i> Perfil</a>
-                <a href="/notes" class="btn btn-primary"><i class="fas fa-sticky-note"></i> Notas</a>
-            </div>
+        <div class="d-flex justify-content-center">
+            <a href="/" class="btn btn-secondary mx-1"><i class="fas fa-home"></i> Home</a>
+            <a href="/notes" class="btn btn-primary mx-1"><i class="fas fa-sticky-note"></i> Notas</a>
+            <a href="/profile" class="btn btn-primary mx-1"><i class="fas fa-user"></i> Perfil</a>
+        </div>
 
+        <div>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, accusantium distinctio? Ut sed, a
+                consectetur optio, distinctio debitis reprehenderit quo corporis facilis laboriosam excepturi incidunt
+                voluptatibus mollitia tempore. Ut, atque.
+            </p>
+        </div>
+
+        <div>
             {{#if logged}}
             <div class="alert alert-success" role="alert">Estás logueado/a</div>
             {{/if}}
@@ -17,4 +25,5 @@
             {{/unless}}
         </div>
     </div>
+
 </div>

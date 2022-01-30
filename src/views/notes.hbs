@@ -1,19 +1,15 @@
 <div class="container p-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1>Notas</h1>
-            <h5>[Esta página es privada]</h5>
-            
-            <div class="mt-4 mb-4">
-                <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Home</a>
-                <a href="/profile" class="btn btn-primary"><i class="fas fa-user"></i> Perfil</a>
-            </div>
-
             <div class="d-flex justify-content-center">
+                <a href="/" class="btn btn-primary mx-1"><i class="fas fa-home"></i> Home</a>
+                <a href="/notes" class="btn btn-secondary mx-1"><i class="fas fa-sticky-note"></i> Notas</a>
+                <a href="/profile" class="btn btn-primary mx-1"><i class="fas fa-user"></i> Perfil</a>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
                 <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#newNoteModal"><i
                         class="fas fa-plus"></i> Nueva nota</button>
             </div>
-
             <div class="card-columns mt-4">
                 {{#each notes}}
                 <div class="card border border-secondary">
@@ -32,7 +28,6 @@
                 </div>
                 {{/each}}
             </div>
-
         </div>
     </div>
 </div>
